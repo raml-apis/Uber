@@ -1,0 +1,67 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "capacity" : {
+      "type" : "number" ,
+      "required" : false
+    } ,
+    "description" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "price_details" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "distance_unit" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "cost_per_minute" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "service_fees" : {
+          "type" : "array" ,
+          "required" : false ,
+          "items" : [
+          ]
+        } ,
+        "minimum" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "cost_per_distance" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "base" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "cancellation_fee" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "currency_code" : {
+          "type" : "string" ,
+          "required" : false
+        }
+      }
+    } ,
+    "image" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "display_name" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "product_id" : {
+      "type" : "string" ,
+      "required" : false
+    }
+  }
+}

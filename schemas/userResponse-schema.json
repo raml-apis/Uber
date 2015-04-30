@@ -1,0 +1,31 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "first_name" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "last_name" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "email" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "picture" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "promo_code" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "uuid" : {
+      "type" : "string" ,
+      "required" : false
+    }
+  }
+}

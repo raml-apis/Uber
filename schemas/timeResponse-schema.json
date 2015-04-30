@@ -1,0 +1,30 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "times" : {
+      "type" : "array" ,
+      "required" : false ,
+      "items" : [
+        {
+          "type" : "object" ,
+          "properties" : {
+            "product_id" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "display_name" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "estimate" : {
+              "type" : "number" ,
+              "required" : false
+            }
+          }
+        }
+      ]
+    }
+  }
+}

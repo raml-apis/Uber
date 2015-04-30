@@ -1,0 +1,94 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "prices" : {
+      "type" : "array" ,
+      "required" : false ,
+      "items" : [
+        {
+          "type" : "object" ,
+          "properties" : {
+            "product_id" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "currency_code" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "display_name" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "estimate" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "low_estimate" : {
+              "type" : "number" ,
+              "required" : false
+            } ,
+            "high_estimate" : {
+              "type" : "number" ,
+              "required" : false
+            } ,
+            "surge_multiplier" : {
+              "type" : "number" ,
+              "required" : false
+            } ,
+            "duration" : {
+              "type" : "number" ,
+              "required" : false
+            } ,
+            "distance" : {
+              "type" : "number" ,
+              "required" : false
+            }
+          }
+        } , {
+          "type" : "object" ,
+          "properties" : {
+            "product_id" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "currency_code" : {
+              "type" : "object" ,
+              "required" : false
+            } ,
+            "display_name" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "estimate" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "low_estimate" : {
+              "type" : "object" ,
+              "required" : false
+            } ,
+            "high_estimate" : {
+              "type" : "object" ,
+              "required" : false
+            } ,
+            "surge_multiplier" : {
+              "type" : "number" ,
+              "required" : false
+            } ,
+            "duration" : {
+              "type" : "number" ,
+              "required" : false
+            } ,
+            "distance" : {
+              "type" : "number" ,
+              "required" : false
+            }
+          }
+        }
+      ]
+    }
+  }
+}

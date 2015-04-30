@@ -1,0 +1,19 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "display_text" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "localized_value" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "type" : {
+      "type" : "string" ,
+      "required" : false
+    }
+  }
+}

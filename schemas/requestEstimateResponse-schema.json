@@ -1,0 +1,67 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "price" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "surge_confirmation_href" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "high_estimate" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "surge_confirmation_id" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "minimum" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "low_estimate" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "surge_multiplier" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "display" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "currency_code" : {
+          "type" : "string" ,
+          "required" : false
+        }
+      }
+    } ,
+    "trip" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "distance_unit" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "duration_estimate" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "distance_estimate" : {
+          "type" : "number" ,
+          "required" : false
+        }
+      }
+    } ,
+    "pickup_estimate" : {
+      "type" : "number" ,
+      "required" : false
+    }
+  }
+}

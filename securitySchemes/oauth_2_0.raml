@@ -1,0 +1,21 @@
+description: |
+  Google recommend using OAuth 2.0 to authorize requests.
+type: OAuth 2.0
+describedBy: 
+  headers: 
+    Authorization: 
+      description: |
+        Used to send a valid OAuth 2 access token.
+  queryParameters: 
+    access_token: 
+      description: |
+        Used to send a valid OAuth 2 access token
+  responses: 
+    401: 
+      description: |
+        Authorization error.
+settings: 
+  authorizationUri: https://login.uber.com/oauth/authorize
+  accessTokenUri: https://login.uber.com/oauth/token
+  authorizationGrants: [ code ]
+  scopes: [ "profile", "history", "history_lite", "request", "request_receipt" ]

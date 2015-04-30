@@ -1,0 +1,50 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "meta" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "surge_confirmation" : {
+          "type" : "object" ,
+          "required" : false ,
+          "properties" : {
+            "href" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "surge_confirmation_id" : {
+              "type" : "string" ,
+              "required" : false
+            }
+          }
+        }
+      }
+    } ,
+    "errors" : {
+      "type" : "array" ,
+      "required" : false ,
+      "items" : [
+        {
+          "type" : "object" ,
+          "properties" : {
+            "status" : {
+              "type" : "number" ,
+              "required" : false
+            } ,
+            "code" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "title" : {
+              "type" : "string" ,
+              "required" : false
+            }
+          }
+        }
+      ]
+    }
+  }
+}

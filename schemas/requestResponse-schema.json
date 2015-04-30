@@ -1,0 +1,85 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "status" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "driver" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "phone_number" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "rating" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "picture_url" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "name" : {
+          "type" : "string" ,
+          "required" : false
+        }
+      }
+    } ,
+    "eta" : {
+      "type" : "number" ,
+      "required" : false
+    } ,
+    "location" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "latitude" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "longitude" : {
+          "type" : "number" ,
+          "required" : false
+        } ,
+        "bearing" : {
+          "type" : "number" ,
+          "required" : false
+        }
+      }
+    } ,
+    "vehicle" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "make" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "model" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "license_plate" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "picture_url" : {
+          "type" : "string" ,
+          "required" : false
+        }
+      }
+    } ,
+    "surge_multiplier" : {
+      "type" : "number" ,
+      "required" : false
+    } ,
+    "request_id" : {
+      "type" : "string" ,
+      "required" : false
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "required" : true ,
+  "$schema" : "http://json-schema.org/draft-03/schema" ,
+  "type" : "object" ,
+  "properties" : {
+    "request_id" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "charges" : {
+      "type" : "array" ,
+      "required" : false ,
+      "items" : [
+        {
+          "type" : "object" ,
+          "properties" : {
+            "name" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "amount" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "type" : {
+              "type" : "string" ,
+              "required" : false
+            }
+          }
+        }
+      ]
+    } ,
+    "surge_charge" : {
+      "type" : "object" ,
+      "required" : false ,
+      "properties" : {
+        "name" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "amount" : {
+          "type" : "string" ,
+          "required" : false
+        } ,
+        "type" : {
+          "type" : "string" ,
+          "required" : false
+        }
+      }
+    } ,
+    "charge_adjustments" : {
+      "type" : "array" ,
+      "required" : false ,
+      "items" : [
+        {
+          "type" : "object" ,
+          "properties" : {
+            "name" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "amount" : {
+              "type" : "string" ,
+              "required" : false
+            } ,
+            "type" : {
+              "type" : "string" ,
+              "required" : false
+            }
+          }
+        }
+      ]
+    } ,
+    "normal_fare" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "subtotal" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "total_charged" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "total_owed" : {
+      "type" : "object" ,
+      "required" : false
+    } ,
+    "currency_code" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "duration" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "distance" : {
+      "type" : "string" ,
+      "required" : false
+    } ,
+    "distance_label" : {
+      "type" : "string" ,
+      "required" : false
+    }
+  }
+}
