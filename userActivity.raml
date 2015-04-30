@@ -1,4 +1,7 @@
 #%RAML 0.8
+title: Uber user activity
+version: v1.2
+baseUri: https://sandbox-api.uber.com/{version}
 securitySchemes:
   - oauth_2_0: !include securitySchemes/oauth_2_0.raml
 schemas:
@@ -30,4 +33,4 @@ schemas:
             example: !include examples/userHistoryResponse-example.json
 documentation: 
   - title: Headline
-    content: !include docs/userActivity/headline.md
+    content: !include docs/headline.md
