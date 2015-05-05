@@ -4,7 +4,7 @@ version: v1.2
 baseUri: https://sandbox-api.uber.com/{version}
 securitySchemes:
   - oauth_2_0: !include securitySchemes/oauth_2_0.raml
-  - basic: !include securitySchemes/basic.raml
+  - bearer: !include securitySchemes/bearer.raml
 schemas:
   - userHistoryResponse: !include /schemas/userHistoryResponse-schema.json
 /history: 
