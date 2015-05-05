@@ -1,7 +1,7 @@
 ---
-site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/dashboard/apis/7782/versions/7918/portal/pages/6523/edit
-apiNotebookVersion: 1.1.66
-title: Gists
+site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/dashboard/apis/19621/versions/20941/portal/pages/34113/edit
+apiNotebookVersion: 1.1.67
+title: Uber
 ---
 
 ```javascript
@@ -15,7 +15,6 @@ assert = chai.assert
 ```
 
 ```javascript
-
 API.createClient('client', '#REF_TAG_DEFENITION');
 ```
 
@@ -30,127 +29,157 @@ API.authenticate(client,"oauth_2_0",{
   clientSecret: clientSecret
 })
 ```
+
+```javascript
+accessToken = $4.accessToken
+```
+
+Location
+
+```javascript
+latitude = 37.926329 
+longitude = -122.073551
+endLatitude = 37.930764
+endLongitude = -122.069410
+```
+
 The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.
 
 Some Products, such as experiments or promotions such as UberPOOL and UberFRESH, will not be returned by this endpoint.
 
 ```javascript
-productsResponse = client.products.get({}, {
-  "latitude": "latitudeValue",
-  "longitude": "longitudeValue"
-})
+productsResponse = client.products.get({
+  "latitude": latitude,
+  "longitude": longitude
+}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
 assert.equal( productsResponse.status, 200 )
+ID_PRODUCT = productsResponse.body.products[2].product_id
 ```
 
-Returns information about the Uber product.
+Returns information about the Uber product
+
 ```javascript
-productIdResponse = client.products.product_id("product_idValue").get()
+productResponse = client.products.product_id(ID_PRODUCT).get({}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
-assert.equal( productIdResponse.status, 200 )
+assert.equal( productResponse.status, 200 )
 ```
+
 The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.
 
 The response also includes low and high estimates, and the ISO 4217 currency code for situations requiring currency conversion. When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier.
 
 ```javascript
-priceResponse = client.estimates.price.get({}, {
-  "end_latitude": "end_latitudeValue",
-  "end_longitude": "end_longitudeValue",
-  "start_latitude": "start_latitudeValue",
-  "start_longitude": "start_longitudeValue"
-})
+priceResponse = client.estimates.price.get({
+  "end_latitude": endLatitude,
+  "end_longitude": endLongitude,
+  "start_latitude": latitude,
+  "start_longitude": longitude
+}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
 assert.equal( priceResponse.status, 200 )
 ```
 
-The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.
+The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs
+
 ```javascript
-timeResponse = client.estimates.time.get({}, {
-  "start_latitude": "start_latitudeValue",
-  "start_longitude": "start_longitudeValue"
-})
+timeResponse = client.estimates.time.get({
+  "start_latitude": latitude,
+  "start_longitude": longitude
+}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
 assert.equal( timeResponse.status, 200 )
 ```
-The Promotions endpoint returns information about the promotion that will be available to a new user based on their activity's location. These promotions do not apply for existing users.
+
+The Promotions endpoint returns information about the promotion that will be available to a new user based on their activity's location. These promotions do not apply for existing users
+
 ```javascript
-promotionsResponse = client.promotions.get({}, {
-  "end_latitude": "end_latitudeValue",
-  "end_longitude": "end_longitudeValue",
-  "start_latitude": "start_latitudeValue",
-  "start_longitude": "start_longitudeValue"
-})
+promotionsResponse = client.promotions.get({
+  "end_latitude": endLatitude,
+  "end_longitude": endLongitude,
+  "start_latitude": latitude,
+  "start_longitude": longitude
+}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
 assert.equal( promotionsResponse.status, 200 )
 ```
-The User Profile endpoint returns information about the Uber user that has authorized with the application.
+
+The User Profile endpoint returns information about the Uber user that has authorized with the application
+
 ```javascript
-meResponse = client.me.get()
+meResponse = client.me.get({}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
 assert.equal( meResponse.status, 200 )
 ```
-The Request endpoint allows a ride to be requested on behalf of an Uber user given their desired product, start, and end locations.
+
+The Request endpoint allows a ride to be requested on behalf of an Uber user given their desired product, start, and end locations
+
 ```javascript
-requestsCreateResponse = client.requests.post({}, {
-  "product_id": "product_idValue",
-  "end_latitude": "end_latitudeValue",
-  "end_longitude": "end_longitudeValue",
-  "start_latitude": "start_latitudeValue",
-  "start_longitude": "start_longitudeValue"
-})
+requestsCreateResponse = client.requests.post({
+  "product_id": ID_PRODUCT,
+  "end_latitude": endLatitude,
+  "end_longitude": endLongitude,
+  "start_latitude": latitude,
+  "start_longitude": longitude
+}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
-assert.equal( requestsCreateResponse.status, 200 )
+assert.equal( requestsCreateResponse.status, 202 )
+ID_REQUEST = requestsCreateResponse.body.request_id
 ```
 
-Get the real time status of an ongoing trip that was created using the Ride Request endpoint.
+Get the real time status of an ongoing trip that was created using the Ride Request endpoint
+
 ```javascript
-requestIdResponse = client.requests.request_id("request_idValue").get()
+requestResponse = client.requests.request_id(ID_REQUEST).get({}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
-assert.equal( requestIdResponse.status, 200 )
+assert.equal( requestResponse.status, 200 )
 ```
 
 Get the receipt information of the completed request.
+Currently Uber prevented access scope "request_receipt" for developers. For this reason following method was commented.
+
 ```javascript
-receiptResponse = client.requests.request_id("request_idValue").receipt.get()
+//receiptResponse = client.requests.request_id(ID_REQUEST).receipt.get({}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
-assert.equal( receiptResponse.status, 200 )
+//assert.equal( receiptResponse.status, 200 )
 ```
 
-Get a map with a visual representation of a Request.
+Get a map with a visual representation of a Request
+
 ```javascript
-mapResponse = client.requests.request_id("request_idValue").map.get()
+mapResponse = client.requests.request_id(ID_REQUEST).map.get({}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
 assert.equal( mapResponse.status, 200 )
 ```
 
-Cancel an ongoing Request on behalf of a rider.
+Cancel an ongoing Request on behalf of a rider
+
 ```javascript
-requestIdDeleteResponse = client.requests.request_id("request_idValue").delete()
+requestDeleteResponse = client.requests.request_id(ID_REQUEST).delete({}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
-assert.equal( requestIdDeleteResponse.status, 200 )
+assert.equal( requestDeleteResponse.status, 204 )
 ```
 
 The Request Estimate endpoint allows a ride to be estimated given the desired product, start, and end locations. If the end location is not provided, only the pickup ETA and details of surge pricing information are provided. If the pickup ETA is null, there are no cars available, but an estimate may still be given to the user.
@@ -158,11 +187,11 @@ The Request Estimate endpoint allows a ride to be estimated given the desired pr
 You can use this endpoint to determine if surge pricing is in effect. Do this before attempting to make a request so that you can preemptively have a user confirm surge by sending them to the surge_confirmation_href provided in the response.
 
 ```javascript
-estimateCreateResponse = client.requests.estimate.post({}, {
-  "product_id": "product_idValue",
-  "start_latitude": "start_latitudeValue",
-  "start_longitude": "start_longitudeValue"
-})
+estimateCreateResponse = client.requests.estimate.post({
+  "product_id": ID_PRODUCT,
+  "start_latitude": latitude,
+  "start_longitude": longitude
+}, {headers:{"Authorization":"Bearer " + accessToken}})
 ```
 
 ```javascript
