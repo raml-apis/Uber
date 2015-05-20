@@ -6,188 +6,188 @@ securitySchemes:
   - oauth_2_0: !include securitySchemes/oauth_2_0.raml
   - bearer: !include securitySchemes/bearer.raml
 schemas:
-  - productsResponse: !include /schemas/productsResponse-schema.json
-  - productResponse: !include /schemas/productResponse-schema.json
-  - priceResponse: !include /schemas/priceResponse-schema.json
-  - timeResponse: !include /schemas/timeResponse-schema.json
-  - promotionsResponse: !include /schemas/promotionsResponse-schema.json
-  - userResponse: !include /schemas/userResponse-schema.json
-  - reguestsResponse: !include /schemas/reguestsResponse-schema.json
-  - requestsConflictResponse: !include /schemas/requestsConflictResponse-schema.json
-  - requestResponse: !include /schemas/requestResponse-schema.json
-  - requestEstimateResponse: !include /schemas/requestEstimateResponse-schema.json
-  - mapRequestResponse: !include /schemas/mapRequestResponse-schema.json
-  - receiptRequestResponse: !include /schemas/receiptRequestResponse-schema.json
+  - productsResponse: !include schemas/productsResponse-schema.json
+  - productResponse: !include schemas/productResponse-schema.json
+  - priceResponse: !include schemas/priceResponse-schema.json
+  - timeResponse: !include schemas/timeResponse-schema.json
+  - promotionsResponse: !include schemas/promotionsResponse-schema.json
+  - userResponse: !include schemas/userResponse-schema.json
+  - reguestsResponse: !include schemas/reguestsResponse-schema.json
+  - requestsConflictResponse: !include schemas/requestsConflictResponse-schema.json
+  - requestResponse: !include schemas/requestResponse-schema.json
+  - requestEstimateResponse: !include schemas/requestEstimateResponse-schema.json
+  - mapRequestResponse: !include schemas/mapRequestResponse-schema.json
+  - receiptRequestResponse: !include schemas/receiptRequestResponse-schema.json
 traits:
   - points: !include traits/points.raml
 securedBy: [ oauth_2_0 ]
-/products: 
-  get: 
+/products:
+  get:
     description: |
       The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.
-      
+
       Some Products, such as experiments or promotions such as UberPOOL and UberFRESH, will not be returned by this endpoint.
-    queryParameters: 
-      latitude: 
+    queryParameters:
+      latitude:
         description: Latitude component of location.
         type: number
         required: true
-      longitude: 
+      longitude:
         description: Longitude component of location.
         type: number
         required: true
-    responses: 
-      200: 
-        body: 
-          application/json: 
+    responses:
+      200:
+        body:
+          application/json:
             schema: productsResponse
             example: !include examples/productsResponse-example.json
-  /{product_id}: 
-    get: 
+  /{product_id}:
+    get:
       description: Returns information about the Uber product.
-      responses: 
-        200: 
-          body: 
-            application/json: 
+      responses:
+        200:
+          body:
+            application/json:
               schema: productResponse
               example: !include examples/productResponse-example.json
-/estimates: 
-  /price: 
-    get: 
+/estimates:
+  /price:
+    get:
       is: [ points ]
       description: |
         The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.
-        
+
         The response also includes low and high estimates, and the ISO 4217 currency code for situations requiring currency conversion. When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier.
-      responses: 
-        200: 
-          body: 
-            application/json: 
+      responses:
+        200:
+          body:
+            application/json:
               schema: priceResponse
               example: !include examples/priceResponse-example.json
-  /time: 
-    get: 
+  /time:
+    get:
       description: The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.
-      queryParameters: 
-        start_latitude: 
+      queryParameters:
+        start_latitude:
           description: Latitude component.
           type: number
           required: true
-        start_longitude: 
+        start_longitude:
           description: Longitude component.
           type: number
           required: true
-        "customer_uuid ": 
+        "customer_uuid ":
           description: Unique customer identifier to be used for experience customization.
-        "product_id ": 
+        "product_id ":
           description: Unique identifier representing a specific product for a given latitude & longitude.
-      responses: 
-        200: 
-          body: 
-            application/json: 
+      responses:
+        200:
+          body:
+            application/json:
               schema: timeResponse
               example: !include examples/timeResponse-example.json
-/promotions: 
-  get: 
+/promotions:
+  get:
     is: [ points ]
     description: "The Promotions endpoint returns information about the promotion that will be available to a new user based on their activity's location. These promotions do not apply for existing users."
-    responses: 
-      200: 
-        body: 
-          application/json: 
+    responses:
+      200:
+        body:
+          application/json:
             schema: promotionsResponse
             example: !include examples/promotionsResponse-example.json
-/me: 
-  get: 
+/me:
+  get:
     description: The User Profile endpoint returns information about the Uber user that has authorized with the application.
-    responses: 
-      200: 
-        body: 
-          application/json: 
+    responses:
+      200:
+        body:
+          application/json:
             schema: userResponse
             example: !include examples/userResponse-example.json
-/requests: 
-  post: 
+/requests:
+  post:
     is: [ points ]
     description: The Request endpoint allows a ride to be requested on behalf of an Uber user given their desired product, start, and end locations.
-    queryParameters: 
-      product_id: 
+    queryParameters:
+      product_id:
         description: The unique ID of the product being requested.
         required: true
-      surge_confirmation_id: 
+      surge_confirmation_id:
         description: The unique identifier of the surge session for a user. Required when returned from a 409 Conflict response on previous POST attempt.
-    responses: 
-      200: 
-        body: 
-          application/json: 
+    responses:
+      200:
+        body:
+          application/json:
             schema: reguestsResponse
             example: !include examples/reguestsResponse-example.json
-      209: 
-        body: 
-          application/json: 
+      209:
+        body:
+          application/json:
             schema: requestsConflictResponse
             example: !include examples/requestsConflictResponse-example.json
-  /{request_id}: 
-    get: 
+  /{request_id}:
+    get:
       description: Get the real time status of an ongoing trip that was created using the Ride Request endpoint.
-      responses: 
-        200: 
-          body: 
-            application/json: 
+      responses:
+        200:
+          body:
+            application/json:
               schema: requestResponse
               example: !include examples/requestResponse-example.json
-    delete: 
+    delete:
       description: Cancel an ongoing Request on behalf of a rider.
-      responses: 
-        204: 
-    /receipt: 
-      get: 
+      responses:
+        204:
+    /receipt:
+      get:
         description: Get the receipt information of the completed request.
-        responses: 
-          200: 
-            body: 
-              application/json: 
+        responses:
+          200:
+            body:
+              application/json:
                 schema: receiptRequestResponse
                 example: !include examples/receiptRequestResponse-example.json
-    /map: 
-      get: 
+    /map:
+      get:
         description: Get a map with a visual representation of a Request.
-        responses: 
-          200: 
-            body: 
-              application/json: 
+        responses:
+          200:
+            body:
+              application/json:
                 schema: mapRequestResponse
                 example: !include examples/mapRequestResponse-example.json
-  /estimate: 
-    post: 
+  /estimate:
+    post:
       description: |
         The Request Estimate endpoint allows a ride to be estimated given the desired product, start, and end locations. If the end location is not provided, only the pickup ETA and details of surge pricing information are provided. If the pickup ETA is null, there are no cars available, but an estimate may still be given to the user.
-        
+
         You can use this endpoint to determine if surge pricing is in effect. Do this before attempting to make a request so that you can preemptively have a user confirm surge by sending them to the surge_confirmation_href provided in the response.
-      queryParameters: 
-        product_id: 
+      queryParameters:
+        product_id:
           description: The unique ID of the product being requested.
           required: true
-        start_latitude: 
+        start_latitude:
           description: 'The beginning or "pickup" latitude.'
           type: number
           required: true
-        start_longitude: 
+        start_longitude:
           description: 'The beginning or "pickup" longitude.'
           type: number
           required: true
-        end_latitude: 
+        end_latitude:
           description: The final or destination latitude. If not included, only the pickup ETA and details of surge pricing will be included.
           type: number
-        end_longitude: 
+        end_longitude:
           description: The final or destination longitude. If not included, only the pickup ETA and details of surge pricing will be included.
           type: number
-      responses: 
-        200: 
-          body: 
-            application/json: 
+      responses:
+        200:
+          body:
+            application/json:
               schema: requestEstimateResponse
               example: !include examples/requestEstimateResponse-example.json
-documentation: 
+documentation:
   - title: Headline
     content: !include docs/api/headline.md
