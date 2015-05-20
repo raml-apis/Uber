@@ -1,5 +1,5 @@
 ---
-site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/dashboard/apis/19621/versions/20941/portal/pages/34113/edit
+site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/organizations/52560d3f-c37a-409d-9887-79e0a9a9ecff/dashboard/apis/19621/versions/20941/portal/pages/34510/edit
 apiNotebookVersion: 1.1.67
 title: Uber
 ---
@@ -30,10 +30,6 @@ API.authenticate(client,"oauth_2_0",{
 })
 ```
 
-```javascript
-accessToken = $4.accessToken
-```
-
 Location
 
 ```javascript
@@ -51,7 +47,7 @@ Some Products, such as experiments or promotions such as UberPOOL and UberFRESH,
 productsResponse = client.products.get({
   "latitude": latitude,
   "longitude": longitude
-}, {headers:{"Authorization":"Bearer " + accessToken}})
+})
 ```
 
 ```javascript
@@ -62,7 +58,7 @@ ID_PRODUCT = productsResponse.body.products[2].product_id
 Returns information about the Uber product
 
 ```javascript
-productResponse = client.products.product_id(ID_PRODUCT).get({}, {headers:{"Authorization":"Bearer " + accessToken}})
+productResponse = client.products.product_id(ID_PRODUCT).get()
 ```
 
 ```javascript
@@ -79,7 +75,7 @@ priceResponse = client.estimates.price.get({
   "end_longitude": endLongitude,
   "start_latitude": latitude,
   "start_longitude": longitude
-}, {headers:{"Authorization":"Bearer " + accessToken}})
+})
 ```
 
 ```javascript
@@ -92,7 +88,7 @@ The Time Estimates endpoint returns ETAs for all products offered at a given loc
 timeResponse = client.estimates.time.get({
   "start_latitude": latitude,
   "start_longitude": longitude
-}, {headers:{"Authorization":"Bearer " + accessToken}})
+})
 ```
 
 ```javascript
@@ -107,7 +103,7 @@ promotionsResponse = client.promotions.get({
   "end_longitude": endLongitude,
   "start_latitude": latitude,
   "start_longitude": longitude
-}, {headers:{"Authorization":"Bearer " + accessToken}})
+})
 ```
 
 ```javascript
@@ -117,7 +113,7 @@ assert.equal( promotionsResponse.status, 200 )
 The User Profile endpoint returns information about the Uber user that has authorized with the application
 
 ```javascript
-meResponse = client.me.get({}, {headers:{"Authorization":"Bearer " + accessToken}})
+meResponse = client.me.get()
 ```
 
 ```javascript
@@ -133,7 +129,7 @@ requestsCreateResponse = client.requests.post({
   "end_longitude": endLongitude,
   "start_latitude": latitude,
   "start_longitude": longitude
-}, {headers:{"Authorization":"Bearer " + accessToken}})
+})
 ```
 
 ```javascript
@@ -144,7 +140,7 @@ ID_REQUEST = requestsCreateResponse.body.request_id
 Get the real time status of an ongoing trip that was created using the Ride Request endpoint
 
 ```javascript
-requestResponse = client.requests.request_id(ID_REQUEST).get({}, {headers:{"Authorization":"Bearer " + accessToken}})
+requestResponse = client.requests.request_id(ID_REQUEST).get()
 ```
 
 ```javascript
@@ -155,7 +151,7 @@ Get the receipt information of the completed request.
 Currently Uber prevented access scope "request_receipt" for developers. For this reason following method was commented.
 
 ```javascript
-//receiptResponse = client.requests.request_id(ID_REQUEST).receipt.get({}, {headers:{"Authorization":"Bearer " + accessToken}})
+//receiptResponse = client.requests.request_id(ID_REQUEST).receipt.get()
 ```
 
 ```javascript
@@ -165,7 +161,7 @@ Currently Uber prevented access scope "request_receipt" for developers. For this
 Get a map with a visual representation of a Request
 
 ```javascript
-mapResponse = client.requests.request_id(ID_REQUEST).map.get({}, {headers:{"Authorization":"Bearer " + accessToken}})
+mapResponse = client.requests.request_id(ID_REQUEST).map.get()
 ```
 
 ```javascript
@@ -175,7 +171,7 @@ assert.equal( mapResponse.status, 200 )
 Cancel an ongoing Request on behalf of a rider
 
 ```javascript
-requestDeleteResponse = client.requests.request_id(ID_REQUEST).delete({}, {headers:{"Authorization":"Bearer " + accessToken}})
+requestDeleteResponse = client.requests.request_id(ID_REQUEST).delete()
 ```
 
 ```javascript
@@ -191,7 +187,7 @@ estimateCreateResponse = client.requests.estimate.post({
   "product_id": ID_PRODUCT,
   "start_latitude": latitude,
   "start_longitude": longitude
-}, {headers:{"Authorization":"Bearer " + accessToken}})
+})
 ```
 
 ```javascript

@@ -1,5 +1,5 @@
 ---
-site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/dashboard/apis/19622/versions/20942/portal/pages/34365/edit
+site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/organizations/52560d3f-c37a-409d-9887-79e0a9a9ecff/dashboard/apis/19622/versions/20942/portal/pages/34516/edit
 apiNotebookVersion: 1.1.67
 title: User activity
 ---
@@ -30,10 +30,6 @@ API.authenticate(client,"oauth_2_0",{
 })
 ```
 
-```javascript
-accessToken = $4.accessToken
-```
-
 The User Activity endpoint returns a limited amount of data about a user's lifetime activity with Uber. The response will include pickup and dropoff times, the city the trips took place in, the distance of past requests, and information about which products were requested.
 
 The history array in the response will have a maximum length based on the limit parameter. The response value count may exceed limit, therefore subsequent API requests may be necessary.
@@ -42,7 +38,7 @@ The history array in the response will have a maximum length based on the limit 
 historyResponse = client.history.get({
   "offset": "0",
   "limit": "5"
-}, {headers:{"Authorization":"Bearer " + accessToken}})
+})
 ```
 
 ```javascript
