@@ -20,6 +20,7 @@ schemas:
   - receiptRequestResponse: !include /schemas/receiptRequestResponse-schema.json
 traits:
   - points: !include traits/points.raml
+securedBy: [ oauth_2_0 ]
 /products: 
   get: 
     description: |

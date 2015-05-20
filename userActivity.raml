@@ -7,6 +7,7 @@ securitySchemes:
   - bearer: !include securitySchemes/bearer.raml
 schemas:
   - userHistoryResponse: !include /schemas/userHistoryResponse-schema.json
+securedBy: [ oauth_2_0 ]
 /history: 
   description: |
     The User Activity endpoint returns a limited amount of data about a user's lifetime activity with Uber. The response will include pickup and dropoff times, the city the trips took place in, the distance of past requests, and information about which products were requested.
