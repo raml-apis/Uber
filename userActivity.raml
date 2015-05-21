@@ -1,7 +1,11 @@
 #%RAML 0.8
 title: Uber user activity
 version: v1.2
-baseUri: https://sandbox-api.uber.com/{version}
+baseUri: https://{apiMode}.uber.com/{version}
+baseUriParameters:
+  apiMode:
+    description: In order to use the Sandbox environment set 'sandbox-api'. Otherwise set 'api'.
+    enum: [ sandbox-api, api ]
 securitySchemes:
   - oauth_2_0: !include securitySchemes/oauth_2_0.raml
   - bearer: !include securitySchemes/bearer.raml

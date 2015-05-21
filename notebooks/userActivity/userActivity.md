@@ -15,7 +15,7 @@ assert = chai.assert
 ```
 
 ```javascript
-API.createClient('client', '#REF_TAG_DEFENITION');
+API.createClient('client', '#REF_TAG_DEFENITION', { baseUriParameters: { apiMode : 'sandbox-api' } });
 ```
 
 ```javascript
