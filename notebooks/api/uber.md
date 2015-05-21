@@ -15,7 +15,17 @@ assert = chai.assert
 ```
 
 ```javascript
-API.createClient('client', '#REF_TAG_DEFENITION', { baseUriParameters: { apiMode : 'sandbox-api' } });
+useSandbox = window.confirm('Use Uber Sandbox?')
+apiMode = useSandbox ? 'sandbox-api' : 'api'
+```
+
+```javascript
+API.createClient('client', '#REF_TAG_DEFENITION',
+{ 
+  baseUriParameters: {  
+    apiMode : apiMode
+  } 
+});
 ```
 
 ```javascript
