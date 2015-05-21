@@ -1,5 +1,5 @@
 ---
-site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/organizations/52560d3f-c37a-409d-9887-79e0a9a9ecff/dashboard/apis/19621/versions/20941/portal/pages/34510/edit
+site: https://anypoint.mulesoft.com/apiplatform/popular/admin/#/organizations/52560d3f-c37a-409d-9887-79e0a9a9ecff/dashboard/apis/19621/versions/20941/portal/pages/35855/edit
 apiNotebookVersion: 1.1.67
 title: Uber
 ---
@@ -148,14 +148,13 @@ assert.equal( requestResponse.status, 200 )
 ```
 
 Get the receipt information of the completed request.
-Currently Uber prevented access scope "request_receipt" for developers. For this reason following method was commented.
 
 ```javascript
-//receiptResponse = client.requests.request_id(ID_REQUEST).receipt.get()
+receiptResponse = client.requests.request_id(ID_REQUEST).receipt.get()
 ```
 
 ```javascript
-//assert.equal( receiptResponse.status, 200 )
+assert.equal( receiptResponse.status, 200 )
 ```
 
 Get a map with a visual representation of a Request
