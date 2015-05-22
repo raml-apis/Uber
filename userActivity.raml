@@ -10,37 +10,37 @@ securitySchemes:
   - oauth_2_0: !include securitySchemes/oauth_2_0.raml
   - bearer: !include securitySchemes/bearer.raml
 schemas:
-  - userHistoryResponse: !include /schemas/userHistoryResponse-schema.json
+  - userHistoryResponse: !include schemas/userHistoryResponse-schema.json
 securedBy: [ oauth_2_0 ]
-/history: 
+/history:
   description: |
     The User Activity endpoint returns a limited amount of data about a user's lifetime activity with Uber. The response will include pickup and dropoff times, the city the trips took place in, the distance of past requests, and information about which products were requested.
-    
+
     The history array in the response will have a maximum length based on the limit parameter. The response value count may exceed limit, therefore subsequent API requests may be necessary.
-  get: 
+  get:
     description: |
       The User Activity endpoint returns a limited amount of data about a user's lifetime activity with Uber. The response will include pickup and dropoff times, the city the trips took place in, the distance of past requests, and information about which products were requested.
-      
+
       The history array in the response will have a maximum length based on the limit parameter. The response value count may exceed limit, therefore subsequent API requests may be necessary.
-    queryParameters: 
-      offset: 
+    queryParameters:
+      offset:
         description: Offset the list of returned results by this amount. Default is zero.
         type: integer
         required: true
         default: 0
         example: 2
-      limit: 
+      limit:
         description: Number of items to retrieve. Default is 5, maximum is 50.
         type: integer
         required: true
         default: 5
         example: 20
-    responses: 
-      200: 
-        body: 
-          application/json: 
+    responses:
+      200:
+        body:
+          application/json:
             schema: userHistoryResponse
             example: !include examples/userHistoryResponse-example.json
-documentation: 
+documentation:
   - title: Headline
     content: !include docs/userActivity/headline.md
