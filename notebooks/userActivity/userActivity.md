@@ -20,7 +20,7 @@ apiMode = useSandbox ? 'sandbox-api' : 'api'
 ```
 
 ```javascript
-API.createClient('client', '#REF_TAG_DEFENITION_Uber user activity',
+API.createClient('client', '#REF_TAG_DEFENITION_Uber user activity:',
 { 
   baseUriParameters: {  
     apiMode : apiMode
