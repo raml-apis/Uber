@@ -1,4 +1,4 @@
-#%RAML 0.8
+#%RAML 1.0
 title: Uber
 version: v1
 baseUri: https://{apiMode}.uber.com/{version}
@@ -9,19 +9,8 @@ baseUriParameters:
 securitySchemes:
   - oauth_2_0: !include securitySchemes/oauth_2_0.raml
   - bearer: !include securitySchemes/bearer.raml
-schemas:
-  - productsResponse: !include schemas/productsResponse-schema.json
-  - productResponse: !include schemas/productResponse-schema.json
-  - priceResponse: !include schemas/priceResponse-schema.json
-  - timeResponse: !include schemas/timeResponse-schema.json
-  - promotionsResponse: !include schemas/promotionsResponse-schema.json
-  - userResponse: !include schemas/userResponse-schema.json
-  - reguestsResponse: !include schemas/reguestsResponse-schema.json
-  - requestsConflictResponse: !include schemas/requestsConflictResponse-schema.json
-  - requestResponse: !include schemas/requestResponse-schema.json
-  - requestEstimateResponse: !include schemas/requestEstimateResponse-schema.json
-  - mapRequestResponse: !include schemas/mapRequestResponse-schema.json
-  - receiptRequestResponse: !include schemas/receiptRequestResponse-schema.json
+uses:
+  types: !include types.raml
 traits:
   - points: !include traits/points.raml
 securedBy: [ oauth_2_0 ]
@@ -44,8 +33,7 @@ securedBy: [ oauth_2_0 ]
       200:
         body:
           application/json:
-            schema: productsResponse
-            example: !include examples/productsResponse-example.json
+            type: types.ProductsResponse
   /{product_id}:
     get:
       description: Returns information about the Uber product.
@@ -53,8 +41,7 @@ securedBy: [ oauth_2_0 ]
         200:
           body:
             application/json:
-              schema: productResponse
-              example: !include examples/productResponse-example.json
+              type: types.ProductResponse
 /estimates:
   /price:
     get:
@@ -67,8 +54,7 @@ securedBy: [ oauth_2_0 ]
         200:
           body:
             application/json:
-              schema: priceResponse
-              example: !include examples/priceResponse-example.json
+              type: types.PriceResponse
   /time:
     get:
       description: The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.
@@ -89,8 +75,7 @@ securedBy: [ oauth_2_0 ]
         200:
           body:
             application/json:
-              schema: timeResponse
-              example: !include examples/timeResponse-example.json
+              type: types.TimeResponse
 /promotions:
   get:
     is: [ points ]
@@ -99,8 +84,7 @@ securedBy: [ oauth_2_0 ]
       200:
         body:
           application/json:
-            schema: promotionsResponse
-            example: !include examples/promotionsResponse-example.json
+            type: types.PromotionsResponse
 /me:
   get:
     description: The User Profile endpoint returns information about the Uber user that has authorized with the application.
@@ -108,8 +92,7 @@ securedBy: [ oauth_2_0 ]
       200:
         body:
           application/json:
-            schema: userResponse
-            example: !include examples/userResponse-example.json
+            type: types.UserResponse
 /requests:
   post:
     is: [ points ]
@@ -124,13 +107,11 @@ securedBy: [ oauth_2_0 ]
       200:
         body:
           application/json:
-            schema: reguestsResponse
-            example: !include examples/reguestsResponse-example.json
+            type: types.RequestResponse
       209:
         body:
           application/json:
-            schema: requestsConflictResponse
-            example: !include examples/requestsConflictResponse-example.json
+            type: types.RequestsConflictResponse
   /{request_id}:
     get:
       description: Get the real time status of an ongoing trip that was created using the Ride Request endpoint.
@@ -138,8 +119,7 @@ securedBy: [ oauth_2_0 ]
         200:
           body:
             application/json:
-              schema: requestResponse
-              example: !include examples/requestResponse-example.json
+              type: types.RequestResponse
     delete:
       description: Cancel an ongoing Request on behalf of a rider.
       responses:
@@ -151,8 +131,7 @@ securedBy: [ oauth_2_0 ]
           200:
             body:
               application/json:
-                schema: receiptRequestResponse
-                example: !include examples/receiptRequestResponse-example.json
+                type: types.ReceiptRequestResponse
     /map:
       get:
         description: Get a map with a visual representation of a Request.
@@ -160,8 +139,7 @@ securedBy: [ oauth_2_0 ]
           200:
             body:
               application/json:
-                schema: mapRequestResponse
-                example: !include examples/mapRequestResponse-example.json
+                type: types.MapRequestResponse
   /estimate:
     post:
       description: |
@@ -190,8 +168,7 @@ securedBy: [ oauth_2_0 ]
         200:
           body:
             application/json:
-              schema: requestEstimateResponse
-              example: !include examples/requestEstimateResponse-example.json
+              type: types.RequestEstimateResponse
 documentation:
   - title: Headline
     content: !include docs/api/headline.md

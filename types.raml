@@ -1,0 +1,314 @@
+#%RAML 1.0 Library
+title: Uber types
+types:
+  ServiceFee:
+    type: object
+    properties:
+      fee: number
+      name: string
+    example:
+      fee: 1.0
+      name: "Safe Rides Fee"
+  ProductResponse:
+    type: object
+    properties:
+      capacity?: number
+      description?: string
+      price_details?:
+        type: object
+        properties:
+          distance_unit?: string
+          cost_per_minute?: number
+          service_fees?: ServiceFee[]
+          minimum?: number
+          cost_per_distance?: number
+          base?: number
+          cancellation_fee?: number
+          currency_code?: string
+      image?: string
+      display_name?: string
+      product_id?: string
+    example:
+      capacity: 4
+      description: "The low-cost Uber"
+      price_details:
+        distance_unit: "mile"
+        cost_per_minute: 0.26
+        service_fees:
+          - fee: 1.0
+            name: "Safe Rides Fee"
+        minimum: 5.0
+        cost_per_distance: 1.3
+        base: 2.2
+        cancellation_fee: 5.0
+        currency_code: "USD"
+      image: "http://d1a3f4spazzrp4.cloudfront.net/car.jpg"
+      display_name: "uberX"
+      product_id: "a1111c8c-c720-46c3-8534-2fcdd730040d"
+  ProductsResponse:
+    type: object
+    properties:
+      products: ProductsResponse[]
+    example:
+      products:
+        - capacity: 4
+          description: "The low-cost Uber"
+          price_details:
+            distance_unit: "mile"
+            cost_per_minute: 0.26
+            service_fees:
+              - fee: 1.0
+                name: "Safe Rides Fee"
+            minimum: 5.0
+            cost_per_distance: 1.3
+            base: 2.2
+            cancellation_fee: 5.0
+            currency_code: "USD"
+          image: "http://d1a3f4spazzrp4.cloudfront.net/car.jpg"
+          display_name: "uberX"
+          product_id: "a1111c8c-c720-46c3-8534-2fcdd730040d"
+  Price:
+    type: object
+    properties:
+      product_id?: string
+      currency_code?: string
+      display_name?: string
+      estimate?: string
+      low_estimate?: number
+      high_estimate?: number
+      surge_multiplier?: number
+      duration?: number
+      distance?: number
+      surge_confirmation_href?: string
+      surge_confirmation_id?: string
+      minimim?: number
+      display?: string
+    example:
+      product_id : "08f17084-23fd-4103-aa3e-9b660223934b"
+      currency_code : "USD"
+      display_name : "UberBLACK"
+      estimate : "$23-29"
+      low_estimate : 23
+      high_estimate : 29
+      surge_multiplier : 1
+      duration : 640
+      distance : 5.34
+  PriceResponse:
+    type: object
+    properties:
+      prices: Price[]
+    example:
+      prices:
+        - product_id : "08f17084-23fd-4103-aa3e-9b660223934b"
+          currency_code : "USD"
+          display_name : "UberBLACK"
+          estimate : "$23-29"
+          low_estimate : 23
+          high_estimate : 29
+          surge_multiplier : 1
+          duration : 640
+          distance : 5.34
+  Time:
+    type: object
+    properties:
+      product_id?: string
+      display_name?: string
+      estimate?: number
+    example:
+      product_id: "5f41547d-805d-4207-a297-51c571cf2a8c"
+      display_name: "UberBLACK"
+      estimate: 410
+  TimeResponse:
+    type: object
+    properties:
+      times: Time[]
+    example:
+      times:
+        - product_id: "5f41547d-805d-4207-a297-51c571cf2a8c"
+          display_name: "UberBLACK"
+          estimate: 410
+  PromotionsResponse:
+    type: object
+    properties:
+      display_text?: string
+      localized_value?: string
+      type?: string
+    example:
+      display_text : "Free ride up to $30"
+      localized_value : "$30"
+      type : "trip_credit"
+  UserResponse:
+    type: object
+    properties:
+      first_name?: string
+      last_name?: string
+      email?: string
+      picture?: string
+      promo_code?: string
+      uuid?: string
+    example:
+      first_name : "Uber"
+      last_name : "Developer"
+      email : "developer@uber.com"
+      picture : "https://..."
+      promo_code : "teypo"
+      uuid : "91d81273-45c2-4b57-8124-d0165f8240c0"
+  Error:
+    type: object
+    properties:
+      status?: number
+      code?: string
+      title?: string
+    example:
+      status : 409
+      code : "surge"
+      title : "Surge pricing is currently in effect for this product."
+  RequestsConflictResponse:
+    type: object
+    properties:
+      meta?:
+        type: object
+        properties:
+          surge_confirmation?:
+            type: object
+            properties:
+              href?: string
+              surge_confirmatiion_id?: string
+      errors?: Error[]
+    example:
+      meta:
+        surge_confirmation:
+          href : "https://api.uber.com/v1/surge-confirmations/e100a670"
+          surge_confirmation_id : "e100a670"
+      errors:
+        - status : 409
+          code : "surge"
+          title : "Surge pricing is currently in effect for this product."
+  RequestEstimateResponse:
+    type: object
+    properties:
+      price?: Price
+      trip?:
+        type: object
+        properties:
+          distance_unit?: string
+          duration_estimate?: number
+          distance_estimate?: number
+      pickup_estimate?: number
+    example:
+      price:
+        surge_confirmation_href: "https:\/\/api.uber.com\/v1\/surge-confirmations\/7d604f5e"
+        high_estimate: 6
+        surge_confirmation_id: "7d604f5e"
+        minimum: 5
+        low_estimate: 5
+        surge_multiplier: 1.2
+        display: "$5-6"
+        currency_code: "USD"
+      trip:
+        distance_unit: "mile"
+        duration_estimate: 9
+        distance_estimate: 2.1
+      pickup_estimate: 2
+  MapRequestResponse:
+    type:  object
+    properties:
+      request_id?: string
+      href?: string
+    example:
+      request_id : "b5512127-a134-4bf4-b1ba-fe9f48f56d9d"
+      href : "https://trip.uber.com/abc123"
+  Charge:
+    type: object
+    properties:
+      name?: string
+      amount?: string
+      type?: string
+    example:
+      name : "Base Fare"
+      amount : "2.20"
+      type : "base_fare"
+  ReceiptRequestResponse:
+    type: object
+    properties:
+      request_id?: string
+      charges: Charge[]
+      surge_charge?:  Charge
+      charge_adjustments?: Charge[]
+      normal_fare?: string
+      subtotal?: string
+      total_charged?: string
+      total_owed?:
+        type: object
+      currency_code?: string
+      duration?: string
+      distance?: string
+      distance_label?: string
+    example:
+      request_id : "b5512127-a134-4bf4-b1ba-fe9f48f56d9d"
+      charges :
+        - name : "Base Fare"
+          amount : "2.20"
+          type : "base_fare"
+          surge_charge :
+            name : "Surge x1.5"
+            amount : "4.26"
+            type : "surge"
+          charge_adjustments" :
+            - name : "Promotion"
+              amount : "-2.43"
+              type : "promotion"
+          normal_fare : "$8.52"
+          subtotal : "$12.78"
+          total_charged : "$5.92"
+          total_owed : null
+          currency_code : "USD"
+          duration : "00:11:35"
+          distance : "1.49"
+          distance_label : "miles"
+  RequestResponse:
+    type: object
+    properties:
+      status?: string
+      driver?:
+        type: object
+        properties:
+          phone_number?: string
+          rating?: number
+          picture_url?: string
+          name?: string
+      eta?: number
+      location?:
+        type: object
+        properties:
+          latitude?: number
+          longitude?: number
+          bearing?: number
+      vehicle?:
+        type: object
+        properties:
+          make?: string
+          model?: string
+          license_plate?: string
+          picture_url?: string
+      surge_multiplier?: number
+      request_id?: string
+    example:
+      status : "accepted"
+      driver : 
+        phone_number : "(555)555-5555"
+        rating : 5
+        picture_url : "https://d1w2poirtb3as9.cloudfront.net/img.jpeg"
+        name : "Bob"
+      eta : 4
+      location :
+        latitude : 37.776033
+        longitude : -122.418143
+        bearing : 33
+      vehicle :
+        make : "Bugatti"
+        model : "Veyron"
+        license_plate : "I<3Uber"
+        picture_url : "https://d1w2poirtb3as9.cloudfront.net/car.jpeg"
+      surge_multiplier : 1
+      request_id : "b2205127-a334-4df4-b1ba-fc9f28f56c96"
