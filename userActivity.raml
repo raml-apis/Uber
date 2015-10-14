@@ -1,4 +1,4 @@
-#%RAML 0.8
+#%RAML 1.0
 title: Uber user activity
 version: v1.2
 baseUri: https://{apiMode}.uber.com/{version}
@@ -9,8 +9,8 @@ baseUriParameters:
 securitySchemes:
   - oauth_2_0: !include securitySchemes/oauth_2_0.raml
   - bearer: !include securitySchemes/bearer.raml
-schemas:
-  - userHistoryResponse: !include schemas/userHistoryResponse-schema.json
+uses:
+  types: !include types.raml
 securedBy: [ oauth_2_0 ]
 /history:
   description: |
@@ -39,8 +39,7 @@ securedBy: [ oauth_2_0 ]
       200:
         body:
           application/json:
-            schema: userHistoryResponse
-            example: !include examples/userHistoryResponse-example.json
+            type: types.UserHistoryResponse
 documentation:
   - title: Headline
     content: !include docs/userActivity/headline.md
