@@ -81,7 +81,7 @@ types:
       distance?: number
       surge_confirmation_href?: string
       surge_confirmation_id?: string
-      minimim?: number
+      minimum?: number
       display?: string
     example:
       product_id : "08f17084-23fd-4103-aa3e-9b660223934b"
@@ -173,7 +173,7 @@ types:
             type: object
             properties:
               href?: string
-              surge_confirmatiion_id?: string
+              surge_confirmation_id?: string
       errors?: Error[]
     example:
       meta:
@@ -233,7 +233,7 @@ types:
     properties:
       request_id?: string
       charges: Charge[]
-      surge_charge?:  Charge
+      surge_charge?: Charge
       charge_adjustments?: Charge[]
       normal_fare?: string
       subtotal?: string
@@ -250,22 +250,22 @@ types:
         - name : "Base Fare"
           amount : "2.20"
           type : "base_fare"
-          surge_charge :
-            name : "Surge x1.5"
-            amount : "4.26"
-            type : "surge"
-          charge_adjustments" :
-            - name : "Promotion"
-              amount : "-2.43"
-              type : "promotion"
-          normal_fare : "$8.52"
-          subtotal : "$12.78"
-          total_charged : "$5.92"
-          total_owed : null
-          currency_code : "USD"
-          duration : "00:11:35"
-          distance : "1.49"
-          distance_label : "miles"
+      surge_charge :
+        name : "Surge x1.5"
+        amount : "4.26"
+        type : "surge"
+      charge_adjustments :
+        - name : "Promotion"
+          amount : "-2.43"
+          type : "promotion"
+      normal_fare : "$8.52"
+      subtotal : "$12.78"
+      total_charged : "$5.92"
+      total_owed : null
+      currency_code : "USD"
+      duration : "00:11:35"
+      distance : "1.49"
+      distance_label : "miles"
   RequestResponse:
     type: object
     properties:
