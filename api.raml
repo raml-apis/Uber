@@ -7,12 +7,12 @@ baseUriParameters:
     description: In order to use the Sandbox environment set 'sandbox-api'. Otherwise set 'api'.
     enum: [ sandbox-api, api ]
 securitySchemes:
-  - oauth_2_0: !include securitySchemes/oauth_2_0.raml
-  - bearer: !include securitySchemes/bearer.raml
+  oauth_2_0: !include securitySchemes/oauth_2_0.raml
+  bearer: !include securitySchemes/bearer.raml
 uses:
-  types: !include types.raml
+  types: types.raml
 traits:
-  - points: !include traits/points.raml
+  points: !include traits/points.raml
 securedBy: [ oauth_2_0 ]
 /products:
   get:
